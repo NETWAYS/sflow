@@ -1,0 +1,1364 @@
+{
+  "title": "sflow-ng",
+  "services": {
+    "query": {
+      "idQueue": [
+        0,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "list": {
+        "0": {
+          "id": 0,
+          "type": "topN",
+          "query": "*",
+          "alias": "interface in",
+          "color": "#BF1B00",
+          "pin": true,
+          "enable": true,
+          "field": "sflow_o_iface_name.raw",
+          "size": 3,
+          "union": "AND"
+        },
+        "1": {
+          "id": 1,
+          "type": "topN",
+          "query": "*",
+          "alias": "interface out",
+          "color": "#BF1B00",
+          "pin": true,
+          "enable": true,
+          "field": "sflow_i_iface_name.raw",
+          "size": 3,
+          "union": "AND"
+        },
+        "2": {
+          "id": 2,
+          "type": "topN",
+          "query": "*",
+          "alias": "ip src",
+          "color": "#0A50A1",
+          "pin": true,
+          "enable": true,
+          "field": "sflow_ipv4_src.raw",
+          "size": 3,
+          "union": "AND"
+        },
+        "3": {
+          "id": 3,
+          "type": "topN",
+          "query": "*",
+          "alias": "ip dst",
+          "color": "#0A50A1",
+          "pin": true,
+          "enable": true,
+          "field": "sflow_ipv4_dst.raw",
+          "size": 3,
+          "union": "AND"
+        },
+        "4": {
+          "id": 4,
+          "type": "topN",
+          "query": "*",
+          "alias": "vlanc src",
+          "color": "#629E51",
+          "pin": true,
+          "enable": true,
+          "field": "sflow_vlan_src",
+          "size": 5,
+          "union": "AND"
+        },
+        "5": {
+          "id": 5,
+          "type": "topN",
+          "query": "*",
+          "alias": "vlan dst",
+          "color": "#629E51",
+          "pin": true,
+          "enable": true,
+          "field": "sflow_vlan_dst",
+          "size": 3,
+          "union": "AND"
+        },
+        "6": {
+          "id": 6,
+          "type": "topN",
+          "query": "*",
+          "alias": "port src",
+          "color": "#BA43A9",
+          "pin": true,
+          "enable": true,
+          "field": "sflow_tcp_src_port",
+          "size": 3,
+          "union": "AND"
+        },
+        "7": {
+          "id": 7,
+          "type": "lucene",
+          "query": "*",
+          "alias": "searchquery",
+          "color": "#052B51",
+          "pin": false,
+          "enable": true
+        },
+        "8": {
+          "id": 8,
+          "type": "topN",
+          "query": "*",
+          "alias": "port dst",
+          "color": "#BA43A9",
+          "pin": true,
+          "enable": true,
+          "field": "sflow_tcp_dst_port",
+          "size": 3,
+          "union": "AND"
+        }
+      },
+      "ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    "filter": {
+      "idQueue": [
+        1
+      ],
+      "list": {
+        "0": {
+          "type": "time",
+          "field": "@timestamp",
+          "from": "now-5m",
+          "to": "now",
+          "mandate": "must",
+          "active": true,
+          "alias": "",
+          "id": 0
+        },
+        "1": {
+          "type": "querystring",
+          "query": "type:sflow",
+          "mandate": "must",
+          "active": true,
+          "alias": "",
+          "id": 1
+        }
+      },
+      "ids": [
+        0,
+        1
+      ]
+    }
+  },
+  "rows": [
+    {
+      "title": "Graph",
+      "height": "350px",
+      "editable": true,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [
+        {
+          "span": 12,
+          "editable": true,
+          "group": [
+            "default"
+          ],
+          "type": "histogram",
+          "mode": "total",
+          "time_field": "@timestamp",
+          "value_field": "sflow_frame_length_multiplied",
+          "auto_int": true,
+          "resolution": 100,
+          "interval": "1s",
+          "fill": 4,
+          "linewidth": 2,
+          "timezone": "browser",
+          "spyable": true,
+          "zoomlinks": true,
+          "bars": false,
+          "stack": true,
+          "points": false,
+          "lines": true,
+          "legend": true,
+          "x-axis": true,
+          "y-axis": true,
+          "percentage": false,
+          "interactive": true,
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              7
+            ]
+          },
+          "title": "Events over time",
+          "intervals": [
+            "auto",
+            "1s",
+            "1m",
+            "5m",
+            "10m",
+            "30m",
+            "1h",
+            "3h",
+            "12h",
+            "1d",
+            "1w",
+            "1M",
+            "1y"
+          ],
+          "options": true,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true
+          },
+          "scale": "1",
+          "y_format": "bytes",
+          "grid": {
+            "max": null,
+            "min": 0
+          },
+          "annotate": {
+            "enable": false,
+            "query": "*",
+            "size": 20,
+            "field": "_type",
+            "sort": [
+              "_score",
+              "desc"
+            ]
+          },
+          "pointradius": 5,
+          "show_query": true,
+          "legend_counts": true,
+          "zerofill": true,
+          "derivative": false,
+          "scaleSeconds": true
+        }
+      ],
+      "notice": false
+    },
+    {
+      "title": "top 10s",
+      "height": "350px",
+      "editable": true,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [
+        {
+          "error": false,
+          "span": 7,
+          "editable": true,
+          "type": "terms",
+          "loadingEditor": false,
+          "field": "sflow_agent_address",
+          "exclude": [],
+          "missing": false,
+          "other": false,
+          "size": 10,
+          "order": "total",
+          "style": {
+            "font-size": "10pt"
+          },
+          "donut": false,
+          "tilt": false,
+          "labels": true,
+          "arrangement": "horizontal",
+          "chart": "bar",
+          "counter_pos": "above",
+          "spyable": true,
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              7
+            ]
+          },
+          "tmode": "terms_stats",
+          "tstat": "total",
+          "valuefield": "sflow_frame_length_multiplied",
+          "title": "Switch"
+        },
+        {
+          "error": false,
+          "span": 1,
+          "editable": true,
+          "type": "stats",
+          "loadingEditor": false,
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              7
+            ]
+          },
+          "style": {
+            "font-size": "24pt"
+          },
+          "format": "bytes",
+          "mode": "total",
+          "display_breakdown": "yes",
+          "sort_field": "variance",
+          "sort_reverse": true,
+          "label_name": "Query",
+          "value_name": "Value",
+          "spyable": true,
+          "show": {
+            "count": true,
+            "min": true,
+            "max": true,
+            "mean": true,
+            "std_deviation": true,
+            "sum_of_squares": true,
+            "total": true,
+            "variance": true
+          },
+          "field": "sflow_frame_length_multiplied"
+        }
+      ],
+      "notice": false
+    },
+    {
+      "title": "src traffic header",
+      "height": "10px",
+      "editable": true,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [
+        {
+          "error": false,
+          "span": 12,
+          "editable": true,
+          "type": "text",
+          "loadingEditor": false,
+          "mode": "html",
+          "content": "<center><h1>Traffic by Source</h1></center>",
+          "style": {},
+          "title": "Traffic by Source"
+        }
+      ],
+      "notice": false
+    },
+    {
+      "title": "top 10s src",
+      "height": "250px",
+      "editable": true,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [
+        {
+          "error": false,
+          "span": 3,
+          "editable": true,
+          "type": "terms",
+          "loadingEditor": false,
+          "field": "sflow_o_iface_name",
+          "exclude": [],
+          "missing": false,
+          "other": false,
+          "size": 10,
+          "order": "total",
+          "style": {
+            "font-size": "10pt"
+          },
+          "donut": false,
+          "tilt": false,
+          "labels": true,
+          "arrangement": "horizontal",
+          "chart": "pie",
+          "counter_pos": "none",
+          "spyable": true,
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              7
+            ]
+          },
+          "tmode": "terms_stats",
+          "tstat": "total",
+          "valuefield": "sflow_frame_length_multiplied",
+          "title": "Interface outgoing"
+        },
+        {
+          "error": false,
+          "span": 3,
+          "editable": true,
+          "type": "terms",
+          "loadingEditor": false,
+          "field": "sflow_ipv4_src",
+          "exclude": [],
+          "missing": false,
+          "other": false,
+          "size": 10,
+          "order": "total",
+          "style": {
+            "font-size": "10pt"
+          },
+          "donut": false,
+          "tilt": false,
+          "labels": true,
+          "arrangement": "horizontal",
+          "chart": "pie",
+          "counter_pos": "none",
+          "spyable": true,
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              7
+            ]
+          },
+          "tmode": "terms_stats",
+          "tstat": "total",
+          "valuefield": "sflow_frame_length_multiplied",
+          "title": "IP src"
+        },
+        {
+          "error": false,
+          "span": 3,
+          "editable": true,
+          "type": "terms",
+          "loadingEditor": false,
+          "field": "sflow_vlan_src",
+          "exclude": [],
+          "missing": false,
+          "other": false,
+          "size": 10,
+          "order": "total",
+          "style": {
+            "font-size": "10pt"
+          },
+          "donut": false,
+          "tilt": false,
+          "labels": true,
+          "arrangement": "horizontal",
+          "chart": "pie",
+          "counter_pos": "none",
+          "spyable": true,
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              7
+            ]
+          },
+          "tmode": "terms_stats",
+          "tstat": "total",
+          "valuefield": "sflow_frame_length_multiplied",
+          "title": "vlan src"
+        },
+        {
+          "error": false,
+          "span": 3,
+          "editable": true,
+          "type": "terms",
+          "loadingEditor": false,
+          "field": "sflow_tcp_dst_port",
+          "exclude": [],
+          "missing": false,
+          "other": false,
+          "size": 10,
+          "order": "total",
+          "style": {
+            "font-size": "10pt"
+          },
+          "donut": false,
+          "tilt": false,
+          "labels": true,
+          "arrangement": "horizontal",
+          "chart": "pie",
+          "counter_pos": "none",
+          "spyable": true,
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              7
+            ]
+          },
+          "tmode": "terms_stats",
+          "tstat": "total",
+          "valuefield": "sflow_frame_length_multiplied",
+          "title": "Port src"
+        }
+      ],
+      "notice": false
+    },
+    {
+      "title": "top 10s src histogram",
+      "height": "150px",
+      "editable": true,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [
+        {
+          "span": 3,
+          "editable": true,
+          "type": "histogram",
+          "loadingEditor": false,
+          "mode": "total",
+          "time_field": "@timestamp",
+          "value_field": "sflow_frame_length_multiplied",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_format": "bytes",
+          "grid": {
+            "max": null,
+            "min": 3
+          },
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              1
+            ]
+          },
+          "annotate": {
+            "enable": false,
+            "query": "*",
+            "size": 20,
+            "field": "_type",
+            "sort": [
+              "_score",
+              "desc"
+            ]
+          },
+          "auto_int": true,
+          "resolution": 100,
+          "interval": "1s",
+          "intervals": [
+            "auto",
+            "1s",
+            "1m",
+            "5m",
+            "10m",
+            "30m",
+            "1h",
+            "3h",
+            "12h",
+            "1d",
+            "1w",
+            "1y"
+          ],
+          "lines": true,
+          "fill": 1,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "spyable": true,
+          "zoomlinks": false,
+          "options": false,
+          "legend": false,
+          "show_query": false,
+          "interactive": true,
+          "legend_counts": true,
+          "timezone": "browser",
+          "percentage": false,
+          "zerofill": true,
+          "derivative": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true
+          },
+          "title": "interface src",
+          "scaleSeconds": true
+        },
+        {
+          "span": 3,
+          "editable": true,
+          "type": "histogram",
+          "loadingEditor": false,
+          "mode": "total",
+          "time_field": "@timestamp",
+          "value_field": "sflow_frame_length_multiplied",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_format": "bytes",
+          "grid": {
+            "max": null,
+            "min": 0
+          },
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              2
+            ]
+          },
+          "annotate": {
+            "enable": false,
+            "query": "*",
+            "size": 20,
+            "field": "_type",
+            "sort": [
+              "_score",
+              "desc"
+            ]
+          },
+          "auto_int": true,
+          "resolution": 100,
+          "interval": "1s",
+          "intervals": [
+            "auto",
+            "1s",
+            "1m",
+            "5m",
+            "10m",
+            "30m",
+            "1h",
+            "3h",
+            "12h",
+            "1d",
+            "1w",
+            "1y"
+          ],
+          "lines": true,
+          "fill": 1,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "spyable": true,
+          "zoomlinks": false,
+          "options": false,
+          "legend": false,
+          "show_query": false,
+          "interactive": true,
+          "legend_counts": true,
+          "timezone": "browser",
+          "percentage": false,
+          "zerofill": true,
+          "derivative": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true
+          },
+          "scaleSeconds": true,
+          "title": "ip src"
+        },
+        {
+          "span": 3,
+          "editable": true,
+          "type": "histogram",
+          "loadingEditor": false,
+          "mode": "total",
+          "time_field": "@timestamp",
+          "value_field": "sflow_frame_length_multiplied",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_format": "bytes",
+          "grid": {
+            "max": null,
+            "min": 0
+          },
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              4
+            ]
+          },
+          "annotate": {
+            "enable": false,
+            "query": "*",
+            "size": 20,
+            "field": "_type",
+            "sort": [
+              "_score",
+              "desc"
+            ]
+          },
+          "auto_int": true,
+          "resolution": 100,
+          "interval": "1s",
+          "intervals": [
+            "auto",
+            "1s",
+            "1m",
+            "5m",
+            "10m",
+            "30m",
+            "1h",
+            "3h",
+            "12h",
+            "1d",
+            "1w",
+            "1y"
+          ],
+          "lines": true,
+          "fill": 1,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "spyable": true,
+          "zoomlinks": false,
+          "options": false,
+          "legend": false,
+          "show_query": false,
+          "interactive": true,
+          "legend_counts": true,
+          "timezone": "browser",
+          "percentage": false,
+          "zerofill": true,
+          "derivative": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true
+          },
+          "title": "vlan src",
+          "scaleSeconds": true
+        },
+        {
+          "span": 3,
+          "editable": true,
+          "type": "histogram",
+          "loadingEditor": false,
+          "mode": "total",
+          "time_field": "@timestamp",
+          "value_field": "sflow_frame_length_multiplied",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_format": "bytes",
+          "grid": {
+            "max": null,
+            "min": 0
+          },
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              6
+            ]
+          },
+          "annotate": {
+            "enable": false,
+            "query": "*",
+            "size": 20,
+            "field": "_type",
+            "sort": [
+              "_score",
+              "desc"
+            ]
+          },
+          "auto_int": true,
+          "resolution": 100,
+          "interval": "1s",
+          "intervals": [
+            "auto",
+            "1s",
+            "1m",
+            "5m",
+            "10m",
+            "30m",
+            "1h",
+            "3h",
+            "12h",
+            "1d",
+            "1w",
+            "1y"
+          ],
+          "lines": true,
+          "fill": 1,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "spyable": true,
+          "zoomlinks": false,
+          "options": false,
+          "legend": false,
+          "show_query": false,
+          "interactive": true,
+          "legend_counts": true,
+          "timezone": "browser",
+          "percentage": false,
+          "zerofill": true,
+          "derivative": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true
+          },
+          "title": "port src",
+          "scaleSeconds": true
+        }
+      ],
+      "notice": false
+    },
+    {
+      "title": "dst traffic header",
+      "height": "100px",
+      "editable": true,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [
+        {
+          "error": false,
+          "span": 12,
+          "editable": true,
+          "type": "text",
+          "loadingEditor": false,
+          "mode": "html",
+          "content": "<center><h1>Traffic by Destination</h1></center>",
+          "style": {},
+          "title": "Traffic by Destination"
+        }
+      ],
+      "notice": false
+    },
+    {
+      "title": "top 10s dst",
+      "height": "250px",
+      "editable": true,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [
+        {
+          "error": false,
+          "span": 3,
+          "editable": true,
+          "type": "terms",
+          "loadingEditor": false,
+          "field": "sflow_i_iface_name",
+          "exclude": [],
+          "missing": false,
+          "other": false,
+          "size": 10,
+          "order": "total",
+          "style": {
+            "font-size": "10pt"
+          },
+          "donut": false,
+          "tilt": false,
+          "labels": true,
+          "arrangement": "horizontal",
+          "chart": "pie",
+          "counter_pos": "none",
+          "spyable": true,
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              7
+            ]
+          },
+          "tmode": "terms_stats",
+          "tstat": "total",
+          "valuefield": "sflow_frame_length_multiplied",
+          "title": "Interface incoming"
+        },
+        {
+          "error": false,
+          "span": 3,
+          "editable": true,
+          "type": "terms",
+          "loadingEditor": false,
+          "field": "sflow_ipv4_dst",
+          "exclude": [],
+          "missing": false,
+          "other": false,
+          "size": 10,
+          "order": "total",
+          "style": {
+            "font-size": "10pt"
+          },
+          "donut": false,
+          "tilt": false,
+          "labels": true,
+          "arrangement": "horizontal",
+          "chart": "pie",
+          "counter_pos": "none",
+          "spyable": true,
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              7
+            ]
+          },
+          "tmode": "terms_stats",
+          "tstat": "total",
+          "valuefield": "sflow_frame_length_multiplied",
+          "title": "IP dst"
+        },
+        {
+          "error": false,
+          "span": 3,
+          "editable": true,
+          "type": "terms",
+          "loadingEditor": false,
+          "field": "sflow_vlan_dst",
+          "exclude": [],
+          "missing": false,
+          "other": false,
+          "size": 10,
+          "order": "total",
+          "style": {
+            "font-size": "10pt"
+          },
+          "donut": false,
+          "tilt": false,
+          "labels": true,
+          "arrangement": "horizontal",
+          "chart": "pie",
+          "counter_pos": "none",
+          "spyable": true,
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              7
+            ]
+          },
+          "tmode": "terms_stats",
+          "tstat": "total",
+          "valuefield": "sflow_frame_length_multiplied",
+          "title": "VLAN dst"
+        },
+        {
+          "error": false,
+          "span": 3,
+          "editable": true,
+          "type": "terms",
+          "loadingEditor": false,
+          "field": "sflow_tcp_dst_port",
+          "exclude": [],
+          "missing": false,
+          "other": false,
+          "size": 10,
+          "order": "count",
+          "style": {
+            "font-size": "10pt"
+          },
+          "donut": false,
+          "tilt": false,
+          "labels": true,
+          "arrangement": "horizontal",
+          "chart": "pie",
+          "counter_pos": "none",
+          "spyable": true,
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              7
+            ]
+          },
+          "tmode": "terms_stats",
+          "tstat": "total",
+          "valuefield": "sflow_frame_length_multiplied",
+          "title": "ports dst"
+        }
+      ],
+      "notice": false
+    },
+    {
+      "title": "top 10s dst histogram",
+      "height": "150px",
+      "editable": true,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [
+        {
+          "span": 3,
+          "editable": true,
+          "type": "histogram",
+          "loadingEditor": false,
+          "mode": "total",
+          "time_field": "@timestamp",
+          "value_field": "sflow_frame_length_multiplied",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_format": "bytes",
+          "grid": {
+            "max": null,
+            "min": 0
+          },
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              0
+            ]
+          },
+          "annotate": {
+            "enable": false,
+            "query": "*",
+            "size": 20,
+            "field": "_type",
+            "sort": [
+              "_score",
+              "desc"
+            ]
+          },
+          "auto_int": true,
+          "resolution": 100,
+          "interval": "1s",
+          "intervals": [
+            "auto",
+            "1s",
+            "1m",
+            "5m",
+            "10m",
+            "30m",
+            "1h",
+            "3h",
+            "12h",
+            "1d",
+            "1w",
+            "1y"
+          ],
+          "lines": true,
+          "fill": 1,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "spyable": true,
+          "zoomlinks": false,
+          "options": false,
+          "legend": false,
+          "show_query": false,
+          "interactive": true,
+          "legend_counts": true,
+          "timezone": "browser",
+          "percentage": false,
+          "zerofill": true,
+          "derivative": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true
+          },
+          "title": "Interface dst",
+          "scaleSeconds": true
+        },
+        {
+          "span": 3,
+          "editable": true,
+          "type": "histogram",
+          "loadingEditor": false,
+          "mode": "total",
+          "time_field": "@timestamp",
+          "value_field": "sflow_frame_length_multiplied",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_format": "bytes",
+          "grid": {
+            "max": null,
+            "min": 0
+          },
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              3
+            ]
+          },
+          "annotate": {
+            "enable": false,
+            "query": "*",
+            "size": 20,
+            "field": "_type",
+            "sort": [
+              "_score",
+              "desc"
+            ]
+          },
+          "auto_int": true,
+          "resolution": 100,
+          "interval": "1s",
+          "intervals": [
+            "auto",
+            "1s",
+            "1m",
+            "5m",
+            "10m",
+            "30m",
+            "1h",
+            "3h",
+            "12h",
+            "1d",
+            "1w",
+            "1y"
+          ],
+          "lines": true,
+          "fill": 1,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "spyable": true,
+          "zoomlinks": false,
+          "options": false,
+          "legend": false,
+          "show_query": false,
+          "interactive": true,
+          "legend_counts": true,
+          "timezone": "browser",
+          "percentage": false,
+          "zerofill": true,
+          "derivative": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true
+          },
+          "title": "ip dst",
+          "scaleSeconds": true
+        },
+        {
+          "span": 3,
+          "editable": true,
+          "type": "histogram",
+          "loadingEditor": false,
+          "mode": "total",
+          "time_field": "@timestamp",
+          "value_field": "sflow_frame_length_multiplied",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_format": "bytes",
+          "grid": {
+            "max": null,
+            "min": 0
+          },
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              5
+            ]
+          },
+          "annotate": {
+            "enable": false,
+            "query": "*",
+            "size": 20,
+            "field": "_type",
+            "sort": [
+              "_score",
+              "desc"
+            ]
+          },
+          "auto_int": true,
+          "resolution": 100,
+          "interval": "1s",
+          "intervals": [
+            "auto",
+            "1s",
+            "1m",
+            "5m",
+            "10m",
+            "30m",
+            "1h",
+            "3h",
+            "12h",
+            "1d",
+            "1w",
+            "1y"
+          ],
+          "lines": true,
+          "fill": 1,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "spyable": true,
+          "zoomlinks": false,
+          "options": false,
+          "legend": false,
+          "show_query": false,
+          "interactive": true,
+          "legend_counts": true,
+          "timezone": "browser",
+          "percentage": false,
+          "zerofill": true,
+          "derivative": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true
+          },
+          "title": "vlan dst",
+          "scaleSeconds": true
+        },
+        {
+          "span": 3,
+          "editable": true,
+          "type": "histogram",
+          "loadingEditor": false,
+          "mode": "total",
+          "time_field": "@timestamp",
+          "value_field": "sflow_frame_length_multiplied",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_format": "bytes",
+          "grid": {
+            "max": null,
+            "min": 0
+          },
+          "queries": {
+            "mode": "selected",
+            "ids": [
+              8
+            ]
+          },
+          "annotate": {
+            "enable": false,
+            "query": "*",
+            "size": 20,
+            "field": "_type",
+            "sort": [
+              "_score",
+              "desc"
+            ]
+          },
+          "auto_int": true,
+          "resolution": 100,
+          "interval": "1s",
+          "intervals": [
+            "auto",
+            "1s",
+            "1m",
+            "5m",
+            "10m",
+            "30m",
+            "1h",
+            "3h",
+            "12h",
+            "1d",
+            "1w",
+            "1y"
+          ],
+          "lines": true,
+          "fill": 1,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "spyable": true,
+          "zoomlinks": false,
+          "options": false,
+          "legend": false,
+          "show_query": false,
+          "interactive": true,
+          "legend_counts": true,
+          "timezone": "browser",
+          "percentage": false,
+          "zerofill": true,
+          "derivative": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true
+          },
+          "title": "ip dst",
+          "scaleSeconds": true
+        }
+      ],
+      "notice": false
+    },
+    {
+      "title": "table",
+      "height": "350px",
+      "editable": true,
+      "collapse": false,
+      "collapsable": true,
+      "panels": [],
+      "notice": false
+    }
+  ],
+  "editable": true,
+  "failover": false,
+  "index": {
+    "interval": "day",
+    "pattern": "[logstash-]YYYY.MM.DD",
+    "default": "NO_TIME_FILTER_OR_INDEX_PATTERN_NOT_MATCHED",
+    "warm_fields": true
+  },
+  "style": "light",
+  "panel_hints": true,
+  "loader": {
+    "save_gist": false,
+    "save_elasticsearch": true,
+    "save_local": true,
+    "save_default": true,
+    "save_temp": true,
+    "save_temp_ttl_enable": true,
+    "save_temp_ttl": "30d",
+    "load_gist": true,
+    "load_elasticsearch": true,
+    "load_elasticsearch_size": 20,
+    "load_local": true,
+    "hide": false
+  },
+  "pulldowns": [
+    {
+      "type": "query",
+      "collapse": false,
+      "notice": false,
+      "enable": true,
+      "query": "*",
+      "pinned": false,
+      "history": [
+        "*",
+        "syslog_severity:\"error\" AND (*)",
+        "syslog_severity:\"warning\" AND (*)",
+        "syslog_severity:\"critical\" AND (*)",
+        "syslog_severity:\"alert\" AND (*)",
+        "syslog_severity:\"notice\" AND (*)",
+        "syslog_severity:\"informational\" AND (*)",
+        "syslog_severity:\"debug\" AND (*)"
+      ],
+      "remember": 10
+    },
+    {
+      "type": "filtering",
+      "collapse": false,
+      "notice": true,
+      "enable": true
+    }
+  ],
+  "nav": [
+    {
+      "type": "timepicker",
+      "collapse": false,
+      "notice": false,
+      "enable": true,
+      "status": "Stable",
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ],
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "timefield": "@timestamp",
+      "now": true,
+      "filter_id": 0
+    }
+  ],
+  "refresh": false
+}
