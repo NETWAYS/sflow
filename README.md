@@ -56,6 +56,8 @@ For getting the parsed sflow-packets as JSON via UDP into logstash you have to c
 
 You can create your very own kibana dashboard for viewing the information and graphs you are interested in. For a quick start you'll find a dashboard in the misc folder, which can be imported via the kibana webinterface.
 
+![Alt text](misc/screen1.png?raw=true "Demo screen")
+
 ## Contributing
 
 1. Fork it ( http://github.com/netways/sflow/fork )
