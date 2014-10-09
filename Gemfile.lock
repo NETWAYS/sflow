@@ -1,0 +1,38 @@
+PATH
+  remote: .
+  specs:
+    sflow (0.0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    bindata (1.8.1)
+    elasticsearch (1.0.1)
+      elasticsearch-api (= 1.0.1)
+      elasticsearch-transport (= 1.0.1)
+    elasticsearch-api (1.0.1)
+      multi_json
+    elasticsearch-transport (1.0.1)
+      faraday
+      multi_json
+    eventmachine (1.0.3)
+    faraday (0.8.8)
+      multipart-post (~> 1.2.0)
+    json (1.8.1)
+    minitest (5.3.4)
+    multi_json (1.7.9)
+    multipart-post (1.2.0)
+    rake (10.2.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bindata
+  bundler (~> 1.5)
+  elasticsearch
+  eventmachine
+  json
+  minitest
+  rake
+  sflow!
