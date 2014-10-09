@@ -8,7 +8,7 @@ class SNMPwalk
         switch = Resolv.new.getname(switchip).split(/\./)[0]
         ports = {}
 
-        snmpoutput = `snmpwalk -v2c -c netways #{switchip} 1.3.6.1.2.1.2.2.1.2`
+        snmpoutput = `snmpwalk -v2c -c public #{switchip} 1.3.6.1.2.1.2.2.1.2`
         snmpoutput.each_line do |line|
            split = line.split(/\s/)
            port = split[0].split(/\./).last

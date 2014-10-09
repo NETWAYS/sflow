@@ -1,22 +1,10 @@
-daemonize: false
+daemonize: true 
 
 switch:
-  10.10.0.240: "net-sw-core"
-  10.10.0.241: "net-sw-rakuten-core"
-  10.10.0.245: "net-sw-j08"
-  10.10.0.238: "net-sw-cb8-1"
-  10.10.0.239: "net-sw-cb8-2"
-  10.10.0.185: "net-virt8"
-  10.10.0.196: "net-virt7"
-  10.10.0.113: "net-virt5"
-  10.10.0.108: "net-virt2"
-  10.10.0.111: "net-virt4"
-  10.10.0.114: "net-virt6"
-  10.10.0.107: "net-virt1"
-  10.10.0.109: "net-virt3"
-  10.10.0.183: "net-virt9"
+  1.2.3.4: "myswitch_hostname"
+  1.2.3.5: "my2ndswitch_hostname"
 
-logstash_host: "net-log.adm.netways.de"
+logstash_host: "logstash.host"
 logstash_port: 6543
 
 
